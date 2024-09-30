@@ -1,0 +1,26 @@
+<div class="bg-gray-100 h-screen flex items-center justify-center">
+  <div class="bg-white p-6 rounded-lg shadow-lg">
+    <h1 class="font-bold text-center">Lista de tareas</h1>
+
+      <form [formGroup]="form" class="flex items-center space-x-2">
+          <input formControlName="taskName" type="text" placeholder="Escribe aquí" class="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <button type="button" (click)="addTask()" class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Enviar</button>
+      </form>
+
+      <ul>
+        <li *ngFor="let task of list; let i = index" class="flex items-center justify-between p-1 mt-4 bg-white rounded-lg shadow-lg border border-gray-300">
+          <span class="text-gray-700">{{task}}</span>
+          <button (click)="removeTask(i)" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Eliminar</button>
+      </li>
+      </ul>
+
+  </div>
+
+
+  <!-- Botón en la esquina superior derecha de la pantalla -->
+  <button
+    class="absolute top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+    (click)="goToRecipes()">
+    Ver recetotas
+  </button>
+</div>
