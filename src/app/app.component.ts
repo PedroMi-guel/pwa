@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { PwaService } from './services/pwa/pwa.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,20 @@ import { PwaService } from './services/pwa/pwa.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  constructor(private pwaService: PwaService) {}
+  deferredPrompt:any;
+
+  constructor() {
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault(); // Evita que el navegador muestre el prompt automáticamente
+      this.deferredPrompt = event; // Guarda la referencia al evento para usarla más tarde
+    });
+  }
+
 
   title = 'pwa';
+
+  install(){
+    this.deferredPrompt.prompt();
+    this.deferredPrompt = null;
+  }
 }

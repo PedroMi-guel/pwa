@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
-import { PwaService } from '../services/pwa/pwa.service';
 
 @Component({
   selector: 'app-todo',
@@ -21,13 +20,11 @@ export class TodoComponent {
   });
 
   isInstalled!:boolean;
+  deferredPrompt:any;
 
   constructor(
     private router:Router,
-    private pwaService: PwaService
   ){
-    this.isInstalled = pwaService.getInstallStatus();
-    console.log(this.isInstalled)
   }
 
   addTask(){
@@ -41,9 +38,5 @@ export class TodoComponent {
 
   goToRecipes(){
     this.router.navigate(['/recipes'])
-  }
-
-  install() {
-    this.pwaService.promptInstall();
   }
 }
